@@ -1,3 +1,13 @@
 <ion-content [fullscreen]="true">
+  <ion-searchbar placeholder="Destino" (ionChange)="buscarEndereco($event)"></ion-searchbar>
+
+  <ion-list [hidden]="!listaEnderecos.length">
+    <ion-item *ngFor="let end of listaEnderecos" lines="full">
+      <ion-label class="ion-text-wrap">
+        {{end.description}}
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
   <div id="map" #map></div>
 </ion-content>

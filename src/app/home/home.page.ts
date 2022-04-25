@@ -13,6 +13,9 @@ export class HomePage implements OnInit{
    map: google.maps.Map;
    center = new google.maps.LatLng(-22.489371455524722, -48.546544406633046);
    coordinates: Position;
+   private autocomplete = new google.maps.places.AutocompleteService();
+
+   listaEnderecos = [];
 
   constructor() {}
 
@@ -48,4 +51,18 @@ export class HomePage implements OnInit{
   }
 
   
+  buscarEndereco(campoBusca: any){
+    const busca = campoBusca.target.value as string;
+
+    if(!busca.trim().length){
+      this.listaEnderecos = [];
+      return false;
+    }
+
+    this.autocomplete.getPlacePredictions({input: busca}, (listaLocais) =>{
+      console.log(listaLocais);
+      this.listaEnderecos = listaLocais;
+    });
+  }
+
 }
